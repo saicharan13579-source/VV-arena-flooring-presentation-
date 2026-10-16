@@ -217,6 +217,27 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
   .meta{grid-template-columns:1fr 1fr}
   .nav .bar{border-radius:18px;gap:14px}
 }
+
+/* preferred option */
+.pref{display:grid;gap:18px}
+.pref-hero{padding:clamp(20px,3.4vw,40px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:center;position:relative;overflow:hidden}
+.pref-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,color-mix(in srgb,#C4DBF2 70%,transparent),color-mix(in srgb,#F3E19C 45%,transparent) 60%,transparent);opacity:.6;pointer-events:none}
+.pref-hero>*{position:relative}
+.pref-hero .tag{display:inline-block;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:var(--glass-strong);border:1px solid var(--edge)}
+.pref-hero h3{font-size:clamp(32px,4.4vw,54px);margin-top:12px}
+.pref-hero p.lead2{font-size:18px;margin-top:12px;max-width:36em}
+.why{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.why li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:16px}
+.why li::before{content:"✓";font-weight:700;color:var(--brand-ink)}
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.zcard{padding:20px;display:grid;gap:8px;align-content:start;position:relative;overflow:hidden}
+.zcard::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--p)}
+.zcard .where{font-family:var(--display);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.zcard b{font-family:var(--display);font-size:24px;text-transform:uppercase;font-weight:600;color:var(--pi);line-height:1.05}
+.zcard .rate{font-size:14px;font-variant-numeric:tabular-nums;padding:4px 10px;border-radius:999px;background:var(--glass-strong);border:1px solid var(--edge);justify-self:start}
+.pref-note{font-size:14.5px}
+@media (max-width:900px){.pref-hero{grid-template-columns:1fr}.zones{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.zones{grid-template-columns:1fr}}
 </style>
 
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -234,6 +255,7 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
       <li><a href="#costs">Costs</a></li>
       <li><a href="#build">Construction</a></li>
       <li><a href="#zoning">Zoning</a></li>
+      <li><a href="#preferred">Recommendation</a></li>
       <li><a href="#next">Next steps</a></li>
     </ul>
   </div></div>
@@ -349,6 +371,41 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
       <div class="glass"><b>Joints cut on time</b><p class="muted">Usually within about 24 hours of the pour.</p></div>
       <div class="glass"><b>Proper curing</b><p class="muted">Water-cure for 14 days or more.</p></div>
       <div class="glass"><b>Moisture tested</b><p class="muted">Below 4–5% before any resin coating.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="preferred">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Our recommendation</p>
+      <h2>Preferred option for V&amp;V</h2>
+      <p class="muted">One strong base slab across the venue, with finishes layered on only where a zone’s use demands it. This keeps construction simple and spends the budget where it matters.</p>
+    </div>
+    <div class="pref">
+      <div class="glass pref-hero c-hardener">
+        <div>
+          <span class="tag">Preferred base floor</span>
+          <h3>Trimix (VDF) slab with non-metallic dry-shake hardener</h3>
+          <p class="lead2">Laid as the standard slab across stores, back-of-house and service areas, and as the base under every finish below. Upgrade to FM2 laser screed only if tall racking or automated equipment is planned.</p>
+        </div>
+        <ul class="why">
+          <li>Strong and economical over large areas</li>
+          <li>Hardener stops dusting under stage trucks, forklifts and event crowds</li>
+          <li>One slab spec for the whole building, so one contractor and one sequence</li>
+          <li>Non-metallic hardener won’t rust in wash-down zones</li>
+          <li>A sound base that epoxy, PU and polishing can go straight onto</li>
+        </ul>
+      </div>
+      <div class="zones">
+        <div class="glass zcard c-trimix"><span class="where">Stores &amp; back-of-house</span><b>Trimix + hardener</b><p class="muted">Takes forklifts and stage equipment with little upkeep.</p><span class="rate">India ₹60–200 + hardener ₹80–200</span></div>
+        <div class="glass zcard c-polished"><span class="where">Concourse &amp; lobby</span><b>Polished concrete</b><p class="muted">Presentable for crowds, dust-free and easy to clean.</p><span class="rate">India ₹100–400</span></div>
+        <div class="glass zcard c-pu"><span class="where">Kitchens &amp; wash areas</span><b>PU concrete, 6 mm, coved</b><p class="muted">Survives hot wash-downs and passes food-safety audits.</p><span class="rate">India ₹150–500+</span></div>
+        <div class="glass zcard c-epoxy"><span class="where">Changing rooms &amp; first aid</span><b>Epoxy, anti-skid</b><p class="muted">Seamless and hygienic, with grip underfoot when wet.</p><span class="rate">India ₹100–400+</span></div>
+        <div class="glass zcard c-esd"><span class="where">Plant, AV &amp; electrical</span><b>Epoxy; ESD in control rooms</b><p class="muted">Dust-free for equipment; anti-static where electronics sit.</p><span class="rate">India ₹100–400 · ESD ₹150–600</span></div>
+        <div class="glass zcard c-pavers"><span class="where">Service yard &amp; parking</span><b>Interlocking pavers, 80 mm</b><p class="muted">Drains well and repairs block by block; Trimix at loading bays.</p><span class="rate">India ₹80–250</span></div>
+      </div>
+      <p class="muted pref-note">The main arena and courts need a dedicated sports surface, covered in a separate study. Final choices depend on confirmed loads, areas and budget; rates are indicative ranges per sq ft before GST.</p>
     </div>
   </div>
 </section>
