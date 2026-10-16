@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>V&amp;V Arena Flooring</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a site-book of floor "core samples" — each system shown as a sketched cutaway block beside its spec, then compared and mapped onto a concept zoning plan. */
+:root{
+  --bg:#EDEFEF; --surface:#F8F9F8; --ink:#1B2023; --muted:#566067; --line:#D2D6D7;
+  --accent:#E1780F; --accent-ink:#A4500A; --accent-soft:#F2B27A; --accent-pale:#F8D9B8;
+  --stone:#C3C0B8; --stone-light:#DEDBD3; --gravel:#9C968C; --soil:#6E5F4E; --sand:#E7D7B2;
+  --hatch:rgba(27,32,35,.55); --shade:rgba(0,0,0,.13); --hyd:#1B2023;
+  --display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --body:'Barlow',Arial,Helvetica,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141819; --surface:#1C2123; --ink:#ECEEEE; --muted:#A4ACB1; --line:#2F3639;
+  --accent:#E8851F; --accent-ink:#F29D48; --accent-soft:#C77A3A; --accent-pale:#D7A06B;
+  --stone:#8F8C86; --stone-light:#ACA9A2; --gravel:#77726A; --soil:#5B4E41; --sand:#B6A883;
+  --hatch:rgba(14,17,18,.6); --shade:rgba(0,0,0,.28); --hyd:#ECEEEE; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141819; --surface:#1C2123; --ink:#ECEEEE; --muted:#A4ACB1; --line:#2F3639;
+  --accent:#E8851F; --accent-ink:#F29D48; --accent-soft:#C77A3A; --accent-pale:#D7A06B;
+  --stone:#8F8C86; --stone-light:#ACA9A2; --gravel:#77726A; --soil:#5B4E41; --sand:#B6A883;
+  --hatch:rgba(14,17,18,.6); --shade:rgba(0,0,0,.28); --hyd:#ECEEEE; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.02;margin:0;text-wrap:balance;letter-spacing:.005em}
+h2{font-size:clamp(34px,5vw,56px);text-transform:uppercase}
+h3{font-size:clamp(28px,3.4vw,38px);text-transform:uppercase}
+p{margin:0}
+a{color:var(--accent-ink)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.muted{color:var(--muted)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;padding-block:10px}
+.nav img{height:30px;width:auto}
+.nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav a{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
+.nav a:hover{color:var(--accent-ink)}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-block:56px 40px}
+.hero h1{font-size:clamp(56px,9vw,124px);text-transform:uppercase;font-weight:700;line-height:.9}
+.hero h1 span{color:var(--accent)}
+.hero .lead{font-size:20px;max-width:34em;margin-top:22px}
+.meta{display:grid;grid-template-columns:repeat(3,auto);gap:8px 32px;margin-top:28px;justify-content:start}
+.meta dt{font-family:var(--display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.meta dd{margin:0;font-weight:600}
+.hero figure{margin:0}
+.hero figcaption{font-size:14px;color:var(--muted);margin-top:6px}
+.sketch{width:100%;height:auto;display:block}
+
+section.band{padding-block:72px;border-top:1px solid var(--line)}
+.head{display:grid;gap:10px;margin-bottom:36px;max-width:46em}
+
+/* needs */
+.needs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.need{background:var(--surface);border:1px solid var(--line);padding:22px;display:grid;gap:8px;align-content:start}
+.need b{font-family:var(--display);font-size:26px;text-transform:uppercase;font-weight:600}
+
+/* system chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chips a{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);padding:6px 12px}
+.chips a:hover{background:var(--ink);color:var(--bg)}
+
+/* floor card */
+.floor{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;padding-block:44px;border-top:1px dashed var(--line);scroll-margin-top:70px}
+.floor:first-of-type{border-top:0}
+.floor .kind{display:flex;gap:12px;align-items:baseline}
+.floor .kind .no{font-family:var(--display);font-weight:700;font-size:20px;color:var(--accent)}
+.legend{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px;font-size:15px}
+.legend li{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center}
+.legend i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:12px;font-weight:600}
+.legend em{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.body{display:grid;gap:22px;min-width:0}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.specs div{background:var(--surface);padding:12px 14px;display:grid;gap:2px}
+.specs dt{font-family:var(--display);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.specs dd{margin:0;font-size:15.5px;line-height:1.35}
+.steps{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.steps li::marker{font-family:var(--display);font-weight:600;color:var(--accent-ink)}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc div{display:grid;gap:4px;align-content:start}
+.pc b{font-family:var(--display);font-size:15px;letter-spacing:.12em;text-transform:uppercase}
+.cost{display:flex;flex-wrap:wrap;gap:8px}
+.cost span{font-size:14.5px;padding:5px 10px;border:1px solid var(--line);background:var(--surface);font-variant-numeric:tabular-nums}
+.cost span b{font-weight:600}
+.sub{font-family:var(--display);font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+
+/* cost chart */
+.chart{background:var(--surface);border:1px solid var(--line);padding:22px 22px 14px;overflow-x:auto}
+.chart-in{min-width:560px}
+.crow{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;height:44px}
+.crow .lab{font-weight:600;font-size:15px}
+.track{position:relative;height:100%;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px calc(100%/6))}
+.bar{position:absolute;top:11px;height:10px;background:var(--accent)}
+.bar.h{top:25px;height:6px;background:var(--hyd)}
+.quote{position:absolute;top:9px;left:0;font-size:13px;color:var(--muted)}
+.axis{display:grid;grid-template-columns:150px 1fr;gap:14px;margin-top:6px}
+.ticks{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.key{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;margin-top:14px;color:var(--muted)}
+.key span::before{content:"";display:inline-block;width:22px;height:8px;margin-right:8px;vertical-align:middle;background:var(--accent)}
+.key span.h::before{height:5px;background:var(--hyd)}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:15px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:14px;background:var(--ink);color:var(--bg)}
+td:first-child{font-weight:600}
+tr:last-child td{border-bottom:0}
+
+/* zoning */
+.zone{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:36px;align-items:start}
+.zone figure{margin:0;background:var(--surface);border:1px solid var(--line);padding:14px}
+.zlist{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.zlist li{display:grid;grid-template-columns:30px 1fr;gap:12px}
+.zlist i{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#1B2023;display:grid;place-items:center;font-weight:600;font-size:14px}
+.zlist b{display:block;font-family:var(--display);font-size:21px;text-transform:uppercase;font-weight:600}
+.zlist li.tbd i{background:transparent;border:1.5px dashed var(--ink);color:var(--ink)}
+
+/* checks & next */
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:c}
+.checks div{border-top:3px solid var(--accent);padding-top:12px;display:grid;gap:4px}
+.checks b{font-family:var(--display);font-size:22px;text-transform:uppercase;font-weight:600}
+.next{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.next ol{margin:0;padding-left:1.3em;display:grid;gap:10px;font-size:18px}
+.contact{background:var(--ink);color:var(--bg);padding:28px;display:grid;gap:14px}
+.contact img{width:200px;height:auto}
+.contact a{color:var(--accent-soft)}
+footer{padding-block:28px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+footer .wrap{display:grid;gap:8px}
+
+@media (max-width:900px){
+  .hero .wrap,.floor,.zone,.next{grid-template-columns:1fr}
+  .needs{grid-template-columns:1fr 1fr}
+  .checks{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .needs,.checks,.pc,.specs{grid-template-columns:1fr}
+  .meta{grid-template-columns:1fr 1fr}
+  .nav ul{gap:14px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero .layer{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) both}
+}
+@keyframes settle{from{transform:translateY(-14px)}to{transform:none}}
+</style>
+
+<!-- shared sketch defs: architectural hatches + hand-drawn wobble -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="2.4"/></filter>
+    <pattern id="pConc" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" style="fill:var(--stone)"/>
+      <circle cx="4" cy="5" r="1.1" style="fill:var(--hatch)"/><circle cx="17" cy="14" r="1" style="fill:var(--hatch)"/><circle cx="22" cy="4" r=".8" style="fill:var(--hatch)"/>
+      <path d="M9 15 l3 -5 l3 5 z" style="fill:none;stroke:var(--hatch);stroke-width:.9"/>
+    </pattern>
+    <pattern id="pGrav" width="20" height="16" patternUnits="userSpaceOnUse">
+      <rect width="20" height="16" style="fill:var(--gravel)"/>
+      <circle cx="5" cy="5" r="3" style="fill:none;stroke:var(--hatch);stroke-width:1"/><circle cx="14" cy="11" r="2.4" style="fill:none;stroke:var(--hatch);stroke-width:1"/><circle cx="16" cy="3" r="1.4" style="fill:none;stroke:var(--hatch);stroke-width:1"/>
+    </pattern>
+    <pattern id="pEarth" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="14" height="14" style="fill:var(--soil)"/><line x1="0" y1="0" x2="0" y2="14" style="stroke:var(--hatch);stroke-width:2"/>
+    </pattern>
+    <pattern id="pSand" width="9" height="9" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" style="fill:var(--sand)"/><circle cx="2" cy="3" r=".8" style="fill:var(--hatch)"/><circle cx="6.5" cy="7" r=".7" style="fill:var(--hatch)"/>
+    </pattern>
+    <pattern id="pPaver" width="40" height="24" patternUnits="userSpaceOnUse">
+      <rect width="40" height="24" style="fill:var(--accent-soft)"/><path d="M0 12 H40 M20 0 V12 M10 12 V24 M30 12 V24" style="stroke:var(--hatch);stroke-width:1.4"/>
+    </pattern>
+  </defs>
+</svg>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <img src="orange_wordmark.png" alt="URVI">
+    <ul>
+      <li><a href="#needs">Brief</a></li>
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#costs">Costs</a></li>
+      <li><a href="#build">Construction</a></li>
+      <li><a href="#zoning">Zoning</a></li>
+      <li><a href="#next">Next steps</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">V&amp;V Sports Arena &amp; Event Venue</p>
+      <h1>Industrial<br><span>flooring</span><br>options</h1>
+      <p class="lead">Eight floor systems for the venue’s back-of-house, service and public areas: how each is built, what it costs in Hyderabad, and where it fits.</p>
+      <dl class="meta">
+        <div><dt>Client</dt><dd>Srinath Jeedi</dd></div>
+        <div><dt>Architect</dt><dd>Vamsi Krishna Sangani</dd></div>
+        <div><dt>Issued</dt><dd>October 2026</dd></div>
+      </dl>
+    </div>
+    <figure>
+      <div id="heroSketch"></div>
+      <figcaption>Concept sketch · exploded build-up of a resin floor, not to scale</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="band" id="needs">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">The brief</p>
+      <h2>What each floor has to handle</h2>
+      <p class="muted">Every zone of the venue is judged on four demands. The right floor meets them at the lowest lifetime cost, not just the lowest build cost.</p>
+    </div>
+    <div class="needs">
+      <div class="need"><b>Load</b><p class="muted">Forklifts, stage trucks, racking and heavy point loads from event rigging.</p></div>
+      <div class="need"><b>Chemicals</b><p class="muted">Spills, cleaning agents and food-safety audits in kitchens and wash areas.</p></div>
+      <div class="need"><b>Heat &amp; wet</b><p class="muted">Hot wash-downs, steam and cold rooms that shock ordinary coatings.</p></div>
+      <div class="need"><b>Flatness</b><p class="muted">Tall storage racks and wheeled equipment need a level, true floor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="systems">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Eight systems</p>
+      <h2>The floors, layer by layer</h2>
+      <p class="muted">Each sketch is a cutaway of the typical build-up, from finish down to subgrade. Layer thicknesses are exaggerated for clarity.</p>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="floors"></div>
+  </div>
+</section>
+
+<section class="band" id="costs">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Cost comparison · ₹ per sq ft</p>
+      <h2>What it costs</h2>
+      <p class="muted">All-India installed ranges against prices listed by Hyderabad suppliers. Many Hyderabad listings cover labour, a thin coat or material only, which is why they sit lower. Compare real bids on the same thickness, scope and GST basis.</p>
+    </div>
+    <div class="chart" role="img" aria-label="Range chart of flooring costs per square foot, India installed versus Hyderabad listings">
+      <div class="chart-in" id="chart"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="build">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Construction comparison</p>
+      <h2>How each is built on site</h2>
+      <p class="muted">Resin and finish systems go on after the slab has cured, so they add time at the end of the programme. Trimix, laser screed and hardener are built with the slab itself.</p>
+    </div>
+    <div class="tbl"><table id="buildTbl"></table></div>
+  </div>
+</section>
+
+<section class="band" id="zoning">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Concept zoning</p>
+      <h2>Where each floor could go</h2>
+      <p class="muted">An illustrative plan for discussion, not the project layout. Most venues mix systems by zone.</p>
+    </div>
+    <div class="zone">
+      <figure>
+        <svg class="sketch" viewBox="0 0 820 520" role="img" aria-label="Concept zoning plan with six numbered zones">
+          <g filter="url(#rough)" style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+            <rect x="20" y="410" width="780" height="90" style="fill:url(#pPaver)"/>
+            <rect x="20" y="20" width="780" height="380" style="fill:var(--surface)"/>
+            <rect x="200" y="40" width="420" height="250" style="fill:none;stroke-dasharray:10 7"/>
+            <rect x="40" y="40" width="140" height="160" style="fill:var(--accent-pale)"/>
+            <rect x="40" y="215" width="140" height="165" style="fill:url(#pConc)"/>
+            <rect x="640" y="40" width="140" height="200" style="fill:var(--accent-soft)"/>
+            <rect x="640" y="255" width="140" height="125" style="fill:var(--accent)"/>
+            <rect x="200" y="305" width="420" height="75" style="fill:var(--stone-light)"/>
+            <path d="M380 400 v-20 M440 400 v-20" />
+            <path d="M260 80 L560 250 M560 80 L260 250" style="stroke-width:1;opacity:.35"/>
+          </g>
+          <g style="font-family:var(--body);font-weight:600;font-size:22px">
+            <g><circle cx="410" cy="165" r="22" style="fill:var(--surface);stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4"/><text x="410" y="173" text-anchor="middle" style="fill:var(--ink)">1</text></g>
+            <g><circle cx="410" cy="342" r="22" style="fill:var(--accent);stroke:var(--ink);stroke-width:2"/><text x="410" y="350" text-anchor="middle" style="fill:#1B2023">2</text></g>
+            <g><circle cx="110" cy="120" r="22" style="fill:var(--accent);stroke:var(--ink);stroke-width:2"/><text x="110" y="128" text-anchor="middle" style="fill:#1B2023">3</text></g>
+            <g><circle cx="110" cy="298" r="22" style="fill:var(--accent);stroke:var(--ink);stroke-width:2"/><text x="110" y="306" text-anchor="middle" style="fill:#1B2023">4</text></g>
+            <g><circle cx="710" cy="140" r="22" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/><text x="710" y="148" text-anchor="middle" style="fill:var(--ink)">5</text></g>
+            <g><circle cx="710" cy="318" r="22" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/><text x="710" y="326" text-anchor="middle" style="fill:var(--ink)">6</text></g>
+            <g><circle cx="110" cy="455" r="22" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/><text x="110" y="463" text-anchor="middle" style="fill:var(--ink)">7</text></g>
+          </g>
+        </svg>
+      </figure>
+      <ol class="zlist">
+        <li class="tbd"><i>1</i><div><b>Main arena &amp; courts</b><span class="muted">Sports surface, to be covered in a separate study.</span></div></li>
+        <li><i>2</i><div><b>Concourse &amp; lobby</b><span class="muted">Polished concrete: durable, low upkeep, presentable.</span></div></li>
+        <li><i>3</i><div><b>Kitchens &amp; wash areas</b><span class="muted">PU concrete with coved skirting for heat, water and hygiene.</span></div></li>
+        <li><i>4</i><div><b>Stores &amp; back-of-house</b><span class="muted">Trimix with dry-shake hardener; FM2 if racking is tall.</span></div></li>
+        <li><i>5</i><div><b>Changing rooms &amp; first aid</b><span class="muted">Epoxy, anti-skid finish.</span></div></li>
+        <li><i>6</i><div><b>Plant, AV &amp; electrical rooms</b><span class="muted">Epoxy, or ESD where control equipment needs it.</span></div></li>
+        <li><i>7</i><div><b>Service yard &amp; parking</b><span class="muted">Interlocking pavers; Trimix at heavy loading bays.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="checks">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Quality on site</p>
+      <h2>What every good floor needs</h2>
+      <p class="muted">Most failures, such as cracking, curling or peeling coatings, start in the base slab. These checks go into the specification and are inspected on site.</p>
+    </div>
+    <div class="checks">
+      <div><b>Tested subgrade</b><p class="muted">Compacted and load-tested before the slab.</p></div>
+      <div><b>Right concrete grade</b><p class="muted">Typically M25–M30 for industrial slabs.</p></div>
+      <div><b>Vapour barrier</b><p class="muted">Under the slab, so coatings don’t blister.</p></div>
+      <div><b>Joints cut on time</b><p class="muted">Usually within about 24 hours of the pour.</p></div>
+      <div><b>Proper curing</b><p class="muted">Water-cure for 14 days or more.</p></div>
+      <div><b>Moisture tested</b><p class="muted">Below 4–5% before any resin coating.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="next">
+  <div class="wrap next">
+    <div class="head" style="margin:0">
+      <p class="eyebrow">Next steps</p>
+      <h2>From options to a specification</h2>
+      <ol style="margin-top:18px">
+        <li>Confirm each zone’s use, loads and area: [__ sq ft]</li>
+        <li>Agree the flooring system for each zone</li>
+        <li>Collect contractor quotes: [₹__ per sq ft]</li>
+        <li>Approve a sample panel on site before full laying</li>
+        <li>Fit flooring into the construction programme: [__ weeks]</li>
+      </ol>
+    </div>
+    <div class="contact">
+      <img src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion">
+      <div><b>Vamsi Krishna Sangani</b><br>URVI DESIGN STUDIO<br><a href="https://urvidesigns.co.in">urvidesigns.co.in</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Prepared for Srinath Jeedi by URVI DESIGN STUDIO. Specs are typical values; confirm with the chosen manufacturer’s data sheet. Concept sketches are schematic and not to scale.</p>
+    <p>Rate sources (Oct 2026): <a href="https://www.studiomatrx.org/guides/industrial-flooring-india">StudioMatrx India guide</a>, <a href="https://www.studiomatrx.org/guides/pu-resin-flooring-india">StudioMatrx PU guide</a>, <a href="https://m.indiamart.com/city/hyderabad/industrial-flooring.html">IndiaMART Hyderabad industrial</a>, <a href="https://m.indiamart.com/city/hyderabad/concrete-flooring.html">IndiaMART Hyderabad concrete</a>, <a href="https://m.indiamart.com/gvm-floor-solution/floor-coating-services.html">GVM Floor Solution</a>, <a href="https://m.indiamart.com/trk-floorings">TRK Floorings</a>, <a href="https://infralens.in/prices/hyderabad">InfraLens Hyderabad</a>, <a href="https://www.studiomatrx.org/guides/flooring-cost-hyderabad">StudioMatrx Hyderabad</a>.</p>
+  </div>
+</footer>
+
+<script>
+const F=[
+ {id:'epoxy',name:'Epoxy flooring',kind:'Resin coating',specs:[['Best for','Pharma, factories, warehouses, showrooms'],['Thickness','0.5–5 mm, coating or self-levelling'],['Ready','Walking ~24 hrs, full load 5–7 days']],
+  steps:['Grind or shot-blast the concrete to open its surface','Repair cracks; confirm slab moisture is below 4–5%','Apply epoxy primer to seal and bond','Lay the body coat: roller coat or 2–5 mm self-levelling','Finish with a top coat for UV, anti-skid or colour'],
+  pros:'Seamless, hygienic, chemical- and stain-resistant; many colours.',cons:'Needs a dry, prepared slab; can yellow in sunlight; weak in heat.',india:'100–400+',hyd:'35–80; cleanroom 160',
+  layers:[['Top coat (UV / anti-skid)','thin','coat',10],['Epoxy body coat','2–5 mm','resin',18],['Epoxy primer','','primer',8],['Prepared concrete slab','','conc',58],['Sub-base','','gsb',30]]},
+ {id:'pu',name:'PU concrete',kind:'Resin mortar',specs:[['Best for','Food, dairies, cold storage, chemical plants'],['Thickness','4–9 mm trowelled mortar'],['Ready','Walking 12–24 hrs, full use 3–7 days']],
+  steps:['Grind the slab and remove oil and contaminants','Cut anchor grooves at edges, drains and joints','Apply primer','Trowel PU mortar to 4–9 mm, with coved skirting at walls','Apply the seal coat'],
+  pros:'Handles heat, thermal shock, wet processes and food acids.',cons:'Roughly 1.3–2× epoxy cost; needs a specialist applicator; matte look.',india:'150–500+',hyd:'36–85; PU-cement 120',
+  layers:[['Seal coat','','coat',10],['PU concrete mortar','4–9 mm','resin',24],['Primer','','primer',8],['Concrete slab, anchor grooves','','conc',54],['Sub-base','','gsb',30]]},
+ {id:'trimix',name:'Trimix (VDF)',kind:'Concrete',specs:[['Best for','Warehouses, logistics parks, parking'],['Concrete','Typically M25–M30, slab as designed'],['Curing','Water-cure 14 days or more']],
+  steps:['Pour concrete in panels; level with a screed vibrator','Vacuum-dewater with mats and a pump to remove excess water','Power-float, then power-trowel to a dense finish','Saw-cut joints within about 24 hrs to control cracking','Water-cure for 14 days or more'],
+  pros:'Economical, dense and strong; fast for large bays.',cons:'Joints need upkeep; dusts without hardener; long curing.',india:'60–200 (method)',hyd:'6–10 labour; 65 with concrete',
+  layers:[['Power-trowelled dense top','','top',10],['Vacuum-dewatered slab','','conc',62],['Vapour barrier','','barrier',5],['Granular sub-base (GSB)','','gsb',28],['Compacted subgrade','','soil',22]]},
+ {id:'fm2',name:'FM2 laser screed',kind:'Concrete',specs:[['Best for','High-rack storage, automated aisles'],['Standard','FM2 flatness class (TR34)'],['Surface','Hardener finish, sealed joints']],
+  steps:['Place concrete; level it with a laser-guided screed machine','Power-float and broadcast dry-shake hardener','Power-trowel the hardener into the surface','Spray a curing compound','Saw-cut joints and fill them with joint sealant'],
+  pros:'Very flat and level; suits tall racks and automation.',cons:'Specialist equipment and crew; costs more than Trimix.',india:'Quote',hyd:'10 (method only)',
+  layers:[['Hardener wear layer','','resin',10],['Laser-screeded slab (FM2)','','conc',62],['Vapour barrier','','barrier',5],['Granular sub-base (GSB)','','gsb',28],['Compacted subgrade','','soil',22]]},
+ {id:'hardener',name:'Dry-shake hardener',kind:'Concrete topping',specs:[['Best for','Forklift and heavy-traffic floors'],['Types','Quartz (non-metallic) or metallic'],['Benefit','Typically 2–4× better wear resistance']],
+  steps:['Pour and level the concrete as normal','Broadcast the first pass of hardener while it is still plastic','Float it in, then broadcast the second pass','Power-trowel to a dense, closed finish','Apply curing compound or water-cure'],
+  pros:'2–4× wear resistance; dust-proof; low added cost.',cons:'Must go on fresh concrete; metallic type rusts if kept wet.',india:'80–200 / 150–300',hyd:'₹500 per 20 kg bag',
+  layers:[['Hardener in top surface','','resin',12],['Concrete slab','','conc',62],['Vapour barrier','','barrier',5],['Granular sub-base (GSB)','','gsb',26],['Compacted subgrade','','soil',20]]},
+ {id:'polished',name:'Polished concrete',kind:'Concrete finish',specs:[['Best for','Lobbies, retail, offices, light industry'],['Finish','Matte to high gloss, set by grit'],['Upkeep','Low; no coating to wear off']],
+  steps:['Grind with coarse diamond tools to expose the surface','Apply a lithium or sodium silicate densifier','Hone through progressively finer grits','Polish up to 1500–3000 grit for the chosen sheen','Apply a guard or sealer for stain resistance'],
+  pros:'Attractive, dust-free, very low maintenance.',cons:'Stains without a sealer; shows slab cracks; not for chemicals.',india:'100–400',hyd:'18–50; overlay 280',
+  layers:[['Guard / sealer','','primer',8],['Densified, polished surface','','top',14],['Concrete slab','','conc',66],['Sub-base','','gsb',36]]},
+ {id:'esd',name:'Vinyl & ESD',kind:'Sheet or tile',specs:[['Best for','Electronics, cleanrooms, AV and labs'],['Format','Sheet, tile or VCT'],['ESD detail','Copper strips drain static to earth']],
+  steps:['Level the base with a self-levelling screed','For ESD: lay copper strips and connect to earth points','Spread the adhesive (conductive for ESD)','Lay the sheets or tiles and roll them down','Heat-weld the joints for a sealed surface'],
+  pros:'Comfortable, cleanroom-ready; ESD protects electronics.',cons:'Damaged by heavy loads and sharp objects; ESD is costly.',india:'100–220 / ESD 150–600',hyd:'25–150; installed 130–320',
+  layers:[['Vinyl / ESD sheet, welded joints','','resin',12],['Adhesive + copper strips','','coat',8],['Self-levelling screed','','top',12],['Concrete slab','','conc',54],['Sub-base','','gsb',30]]},
+ {id:'pavers',name:'Pavers & tiles',kind:'Modular',specs:[['Best for','Yards, loading areas, parking'],['Options','Concrete pavers, Kota or granite'],['Upkeep','Replace single blocks as needed']],
+  steps:['Excavate and compact the natural soil','Lay and compact a granular sub-base (GSB)','Spread and screed a sand bedding layer','Lay pavers in pattern; fix edge restraints','Vibrate with a plate compactor; brush sand into joints'],
+  pros:'Easy to repair block by block; drains well outdoors.',cons:'Joints trap dirt; can settle; not hygienic or seamless.',india:'80–250',hyd:'28–61 (60–80 mm blocks)',
+  layers:[['Interlocking pavers','60–80 mm','paver',26],['Sand bedding','','sand',12],['Granular sub-base (GSB)','','gsb',44],['Compacted subgrade','','soil',40]]}
+];
+const FILL={coat:'var(--accent-soft)',resin:'var(--accent)',primer:'var(--accent-pale)',top:'var(--stone-light)',conc:'url(#pConc)',barrier:'var(--ink)',gsb:'url(#pGrav)',soil:'url(#pEarth)',sand:'url(#pSand)',paver:'url(#pPaver)'};
+
+function block(layers,{scale=2.6,gap=0,num=true}={}){
+  const x0=24,W=290,dx=70,dy=-42,y0=56;
+  let y=y0,parts=[],marks=[];
+  layers.forEach((L,i)=>{
+    const h=Math.max(L[3]*scale,6), f=FILL[L[2]];
+    const top=(i===0||gap>0)?`<polygon points="${x0},${y} ${x0+dx},${y+dy} ${x0+W+dx},${y+dy} ${x0+W},${y}" style="fill:${f}"/><polygon points="${x0},${y} ${x0+dx},${y+dy} ${x0+W+dx},${y+dy} ${x0+W},${y}" style="fill:rgba(255,255,255,.18);stroke:none"/>`:'';
+    parts.push(`<g class="layer" style="animation-delay:${i*90}ms">${top}<rect x="${x0}" y="${y}" width="${W}" height="${h}" style="fill:${f}"/><polygon points="${x0+W},${y} ${x0+W+dx},${y+dy} ${x0+W+dx},${y+dy+h} ${x0+W},${y+h}" style="fill:${f}"/><polygon points="${x0+W},${y} ${x0+W+dx},${y+dy} ${x0+W+dx},${y+dy+h} ${x0+W},${y+h}" style="fill:var(--shade);stroke:none"/></g>`);
+    if(num){const cy=y+h/2+dy/2, cx=x0+W+dx+34;
+      marks.push(`<line x1="${x0+W+dx/2}" y1="${cy}" x2="${cx-14}" y2="${cy}" style="stroke:var(--ink);stroke-width:1.2"/><circle cx="${cx}" cy="${cy}" r="13" style="fill:var(--surface);stroke:var(--ink);stroke-width:1.5"/><text x="${cx}" y="${cy+5}" text-anchor="middle" style="font:600 14px var(--body);fill:var(--ink)">${i+1}</text>`);}
+    y+=h+gap;
+  });
+  const H=y+18, Wv=x0+W+dx+(num?60:24);
+  return `<svg class="sketch" viewBox="0 0 ${Wv} ${H}" role="img" aria-label="Cutaway sketch of ${layers.length} layers"><g filter="url(#rough)" style="stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round">${parts.join('')}</g>${marks.join('')}</svg>`;
+}
+document.getElementById('heroSketch').innerHTML=block(F[0].layers,{scale:3,gap:20,num:true});
+
+document.getElementById('chips').innerHTML=F.map((f,i)=>`<a href="#${f.id}">${String(i+1).padStart(2,'0')} ${f.name}</a>`).join('');
+document.getElementById('floors').innerHTML=F.map((f,i)=>`
+<article class="floor" id="${f.id}">
+  <div>${block(f.layers)}
+    <ol class="legend">${f.layers.map((L,j)=>`<li><i>${j+1}</i><span>${L[0]}</span><em>${L[1]}</em></li>`).join('')}</ol>
+  </div>
+  <div class="body">
+    <div class="kind"><span class="no">${String(i+1).padStart(2,'0')}</span><span class="eyebrow">${f.kind}</span></div>
+    <h3>${f.name}</h3>
+    <dl class="specs">${f.specs.map(s=>`<div><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}</dl>
+    <div><p class="sub">How it’s installed</p><ol class="steps">${f.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+    <div class="pc"><div><b>Pros</b><p>${f.pros}</p></div><div><b>Cons</b><p>${f.cons}</p></div></div>
+    <div class="cost"><span>India installed <b>₹${f.india}</b></span><span>Hyderabad listings <b>₹${f.hyd}</b></span></div>
+  </div>
+</article>`).join('');
+
+/* cost chart, scale 0–600 */
+const C=[['Trimix (VDF)',[60,200],[6,65]],['FM2 laser screed',null,[10,10]],['Hardener',[80,300],null],['Polished concrete',[100,400],[18,50]],['Epoxy',[100,400],[35,160]],['PU concrete',[150,500],[36,120]],['Vinyl',[100,220],[25,320]],['ESD / anti-static',[150,600],[65,70]],['Pavers',[80,250],[28,61]]];
+const pct=v=>(v/600*100).toFixed(2)+'%';
+document.getElementById('chart').innerHTML=C.map(([n,a,h])=>`<div class="crow"><span class="lab">${n}</span><div class="track">${a?`<span class="bar" style="left:${pct(a[0])};width:${pct(a[1]-a[0])}" title="India installed ₹${a[0]}–${a[1]}"></span>`:`<span class="quote">India: priced by quote</span>`}${h?`<span class="bar h" style="left:${pct(h[0])};width:max(4px,${pct(h[1]-h[0])})" title="Hyderabad listings ₹${h[0]}–${h[1]}"></span>`:''}</div></div>`).join('')+
+`<div class="axis"><span></span><div class="ticks">${[0,100,200,300,400,500,600].map(t=>`<span>₹${t}</span>`).join('')}</div></div>
+<div class="key"><span>India installed range, 2026</span><span class="h">Hyderabad supplier listings, Oct 2026</span></div>
+<p class="muted" style="font-size:14px;margin-top:8px">Hardener has no Hyderabad sq ft rate listed (material ₹500 per 20 kg bag). FM2 is priced per project.</p>`;
+
+/* construction table */
+const B=[['Type','Thickness','Ready for use','Key equipment','Crew'],
+['Epoxy','0.5–5 mm','24 h walk; 5–7 days load','Grinder, rollers, trowels','Specialist'],
+['PU concrete','4–9 mm','12–24 h walk; 3–7 days load','Grinder, groove cutter','Approved applicator'],
+['Trimix','Full slab','After 14+ days curing','Vacuum pump, power trowel','Concrete crew'],
+['FM2 laser screed','Full slab','After curing and joint sealing','Laser screed, power trowels','Specialist'],
+['Hardener','Surface layer','With the slab','Spreader, power trowel','Concrete crew'],
+['Polished concrete','In the slab','Soon after polishing','Diamond grinders','Specialist'],
+['Vinyl / ESD','Sheet or tile','After adhesive cures','Screed, welding gun','Specialist'],
+['Pavers / tiles','Blocks on sand bed','Right after compaction','Plate compactor','General crew']];
+document.getElementById('buildTbl').innerHTML=`<thead><tr>${B[0].map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${B.slice(1).map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+</script>
+
+</html>
