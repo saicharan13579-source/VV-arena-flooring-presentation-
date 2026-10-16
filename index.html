@@ -78,6 +78,9 @@ a:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:
 .nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:9;margin-top:10px}
 .nav .bar{display:flex;align-items:center;gap:22px;padding:10px 18px;border-radius:999px}
 .nav img{height:28px;width:auto}
+.logo-link{display:inline-flex;align-items:center;border-radius:8px;transition:opacity .2s,transform .2s}
+.logo-link:hover{opacity:.75;transform:translateY(-1px)}
+.contact .logo-link{justify-self:start}
 .nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none;min-width:0}
 .nav a{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
 .nav a:hover{color:var(--brand-ink)}
@@ -224,7 +227,7 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
 
 <nav class="nav" aria-label="Sections">
   <div class="wrap"><div class="bar glass">
-    <img class="lg-light" src="black_wordmark.png" alt="URVI"><img class="lg-dark" src="white_wordmark.png" alt="URVI">
+    <a class="logo-link" href="https://urvidesigns.co.in" target="_blank" rel="noopener" aria-label="URVI DESIGN STUDIO website"><img class="lg-light" src="black_wordmark.png" alt="URVI"><img class="lg-dark" src="white_wordmark.png" alt="URVI"></a>
     <ul>
       <li><a href="#needs">Brief</a></li>
       <li><a href="#systems">Systems</a></li>
@@ -246,7 +249,7 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
         <p class="lead">Eight floor systems for the venue’s back-of-house, service and public areas: how each is built, what it costs in Hyderabad, and where it fits.</p>
       </div>
       <dl class="cells">
-        <div class="logo-cell"><img class="lg-light" src="black_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><img class="lg-dark" src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><span>concept issue</span></div>
+        <div class="logo-cell"><a class="logo-link" href="https://urvidesigns.co.in" target="_blank" rel="noopener" aria-label="URVI DESIGN STUDIO website"><img class="lg-light" src="black_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><img class="lg-dark" src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"></a><span>concept issue</span></div>
         <div><dt>Client</dt><dd>Srinath Jeedi</dd></div>
         <div><dt>Architect</dt><dd>Vamsi Krishna Sangani</dd></div>
         <div><dt>Drawing</dt><dd>FL-01 · Flooring options</dd></div>
@@ -364,7 +367,7 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
       </ol>
     </div>
     <div class="glass contact">
-      <img class="lg-light" src="black_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><img class="lg-dark" src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion">
+      <a class="logo-link" href="https://urvidesigns.co.in" target="_blank" rel="noopener" aria-label="URVI DESIGN STUDIO website"><img class="lg-light" src="black_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><img class="lg-dark" src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"></a>
       <div><b>Vamsi Krishna Sangani</b><br>URVI DESIGN STUDIO<br><a href="https://urvidesigns.co.in">urvidesigns.co.in</a></div>
     </div>
   </div>
