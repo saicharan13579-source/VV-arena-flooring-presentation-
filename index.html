@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Caveat:wght@500;600&display=swap">
 <style>
 /* Layout concept: frosted-glass panels floating over a pastel "material light" field; each floor system owns a pastel hue, and its concept sketch pencils itself in as it scrolls into view. */
-@property --ta{syntax:'<color>';inherits:true;initial-value:#F6C9A8}
+@property --ta{syntax:'<color>';inherits:true;initial-value:#C4DBF2}
 @property --tb{syntax:'<color>';inherits:true;initial-value:#C4DBF2}
 :root{
   --bg:#EDF0F4; --ink:#18202A; --muted:#4A5562; --pencil:#2A3441;
   --glass:rgba(255,255,255,.52); --glass-strong:rgba(255,255,255,.7); --edge:rgba(255,255,255,.75); --edge-out:rgba(24,32,42,.08); --hi:rgba(255,255,255,.9); --drop:rgba(40,52,70,.12);
-  --brand:#E1780F; --brand-ink:#A4500A;
+  --brand:#2E4A70; --brand-ink:#2E4A70;
   --stone:#CFCBC3; --stone-l:#E6E3DC; --grav:#B9B3A8; --soil:#A08D78; --sand:#EADBB8;
-  --ta:#F6C9A8; --tb:#C4DBF2;
+  --ta:#C4DBF2; --tb:#D6CCF2;
   --display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
   --body:'Barlow',Arial,Helvetica,sans-serif;
   --hand:'Caveat','Segoe Print','Comic Sans MS',cursive;
@@ -24,21 +24,27 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0E1217; --ink:#EEF1F5; --muted:#A9B4C0; --pencil:#DCE3EB;
   --glass:rgba(26,32,40,.5); --glass-strong:rgba(26,32,40,.72); --edge:rgba(255,255,255,.14); --edge-out:rgba(0,0,0,.3); --hi:rgba(255,255,255,.12); --drop:rgba(0,0,0,.4);
-  --brand:#EE8A26; --brand-ink:#F5A65A;
+  --brand:#A9C6EC; --brand-ink:#A9C6EC;
   --stone:#6E6A64; --stone-l:#8A867F; --grav:#615C55; --soil:#5F5244; --sand:#8E8266; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0E1217; --ink:#EEF1F5; --muted:#A9B4C0; --pencil:#DCE3EB;
   --glass:rgba(26,32,40,.5); --glass-strong:rgba(26,32,40,.72); --edge:rgba(255,255,255,.14); --edge-out:rgba(0,0,0,.3); --hi:rgba(255,255,255,.12); --drop:rgba(0,0,0,.4);
-  --brand:#EE8A26; --brand-ink:#F5A65A;
+  --brand:#A9C6EC; --brand-ink:#A9C6EC;
   --stone:#6E6A64; --stone-l:#8A867F; --grav:#615C55; --soil:#5F5244; --sand:#8E8266; color-scheme:dark}
 
+/* logo swaps by theme */
+.lg-dark{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lg-light{display:none}:root:not([data-theme="light"]) .lg-dark{display:block}}
+:root[data-theme="dark"] .lg-light{display:none}
+:root[data-theme="dark"] .lg-dark{display:block}
+
 /* per-system pastel: --p wash, --pi ink */
-.c-epoxy{--p:#F6C9A8;--pi:#A84F12}
+.c-epoxy{--p:#F6CAD3;--pi:#943251}
 .c-pu{--p:#BFE6D3;--pi:#25704F}
 .c-trimix{--p:#C4DBF2;--pi:#2A5B8E}
 .c-fm2{--p:#D6CCF2;--pi:#5544A0}
 .c-hardener{--p:#F3E19C;--pi:#7D600C}
-.c-polished{--p:#F2C8D3;--pi:#963A56}
+.c-polished{--p:#DDD7CF;--pi:#62564A}
 .c-esd{--p:#B7E5E8;--pi:#1E7277}
 .c-pavers{--p:#D2E2BC;--pi:#4A672A}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) [class*="c-"]{--pi:var(--p)}}
@@ -52,7 +58,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .aurora i:nth-child(1){width:55vw;height:55vw;left:-12vw;top:-10vw;background:var(--ta)}
 .aurora i:nth-child(2){width:50vw;height:50vw;right:-14vw;top:20vh;background:var(--tb)}
 .aurora i:nth-child(3){width:40vw;height:40vw;left:30vw;bottom:-18vw;background:#E6D6F5}
-.aurora i:nth-child(4){width:28vw;height:28vw;left:8vw;top:55vh;background:#FBE3C4}
+.aurora i:nth-child(4){width:28vw;height:28vw;left:8vw;top:55vh;background:#BFE6D3}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .aurora i{opacity:.22}}
 :root[data-theme="dark"] .aurora i{opacity:.22}
 
@@ -78,14 +84,24 @@ a:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:
 
 /* hero */
 .hero{padding-block:36px 24px}
-.hero .glass{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;padding:clamp(22px,4vw,48px)}
-.hero h1{font-size:clamp(54px,8.6vw,120px);text-transform:uppercase;font-weight:700;line-height:.9}
+.sheet{padding:clamp(14px,2.4vw,26px);display:grid;gap:18px}
+.sheet .drawing{border:1.5px solid var(--pencil);border-radius:12px;padding:clamp(6px,1.5vw,16px);background:repeating-linear-gradient(0deg,transparent 0 31px,var(--edge-out) 31px 32px),repeating-linear-gradient(90deg,transparent 0 31px,var(--edge-out) 31px 32px)}
+.sheet figure{margin:0}
+.tblock{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);border:1.5px solid var(--pencil);border-radius:12px;overflow:hidden}
+.tblock .ttl{padding:clamp(16px,2.6vw,28px);display:grid;gap:12px;border-right:1.5px solid var(--pencil);align-content:center}
+.hero h1{font-size:clamp(44px,6.4vw,88px);text-transform:uppercase;font-weight:700;line-height:.92}
 .hero h1 span{color:var(--brand)}
-.hero .lead{font-size:20px;max-width:32em;margin-top:20px}
-.meta{display:grid;grid-template-columns:repeat(3,auto);gap:8px 30px;margin:26px 0 0;justify-content:start}
-.meta dt{font-family:var(--display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.meta dd{margin:0;font-weight:600}
-.hero figure{margin:0}
+.hero .lead{font-size:18px;max-width:34em}
+.cells{display:grid;grid-template-columns:1fr 1fr}
+.cells div{padding:12px 16px;border-bottom:1px solid var(--edge-out);display:grid;gap:2px}
+.cells div:nth-child(odd){border-right:1px solid var(--edge-out)}
+.cells div:nth-last-child(-n+2){border-bottom:0}
+.cells dt{font-family:var(--display);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.cells dd{margin:0;font-weight:600;font-size:15.5px;line-height:1.3}
+.cells .logo-cell{grid-column:span 2;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--edge-out)}
+.cells .logo-cell img{height:44px;width:auto}
+.cells .logo-cell span{font-family:var(--hand);font-size:20px;color:var(--muted)}
+@media (max-width:760px){.tblock{grid-template-columns:1fr}.tblock .ttl{border-right:0;border-bottom:1.5px solid var(--pencil)}}
 
 section.band{padding-block:40px}
 .head{display:grid;gap:10px;margin-bottom:26px;max-width:46em}
@@ -154,7 +170,7 @@ section.band{padding-block:40px}
 .axis{display:grid;grid-template-columns:160px 1fr;gap:14px;margin-top:6px}
 .ticks{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .key{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;margin-top:14px;color:var(--muted)}
-.key span::before{content:"";display:inline-block;width:22px;height:10px;border-radius:6px;margin-right:8px;vertical-align:middle;background:linear-gradient(90deg,#F6C9A8,#C4DBF2,#BFE6D3)}
+.key span::before{content:"";display:inline-block;width:22px;height:10px;border-radius:6px;margin-right:8px;vertical-align:middle;background:linear-gradient(90deg,#F6CAD3,#C4DBF2,#BFE6D3)}
 .key span.h::before{height:5px;background:var(--ink)}
 
 /* table */
@@ -181,9 +197,11 @@ tr:last-child td{border-bottom:0}
 .checks .n{font-family:var(--display);font-weight:700;font-size:30px;color:var(--brand)}
 .next{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
 .next ol{margin:18px 0 0;padding-left:1.3em;display:grid;gap:10px;font-size:18px}
-.contact{padding:28px;display:grid;gap:14px;align-content:center;background:linear-gradient(140deg,color-mix(in srgb,var(--brand) 88%,transparent),color-mix(in srgb,var(--brand) 62%,transparent));color:#fff;border-color:rgba(255,255,255,.4)}
+.contact{padding:28px;display:grid;gap:14px;align-content:center;background:linear-gradient(140deg,var(--cw1),var(--cw2))}
+:root{--cw1:rgba(196,219,242,.6);--cw2:rgba(214,204,242,.45)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--cw1:rgba(169,198,236,.14);--cw2:rgba(214,204,242,.08)}}
+:root[data-theme="dark"]{--cw1:rgba(169,198,236,.14);--cw2:rgba(214,204,242,.08)}
 .contact img{width:210px;height:auto}
-.contact a{color:#fff}
 footer{padding-block:30px 40px;font-size:14px;color:var(--muted)}
 footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
 
@@ -206,7 +224,7 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
 
 <nav class="nav" aria-label="Sections">
   <div class="wrap"><div class="bar glass">
-    <img src="orange_wordmark.png" alt="URVI">
+    <img class="lg-light" src="black_wordmark.png" alt="URVI"><img class="lg-dark" src="white_wordmark.png" alt="URVI">
     <ul>
       <li><a href="#needs">Brief</a></li>
       <li><a href="#systems">Systems</a></li>
@@ -219,18 +237,24 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
 </nav>
 
 <header class="hero">
-  <div class="wrap"><div class="glass">
-    <div>
-      <p class="eyebrow">V&amp;V Sports Arena &amp; Event Venue</p>
-      <h1>Industrial<br><span>flooring</span><br>options</h1>
-      <p class="lead">Eight floor systems for the venue’s back-of-house, service and public areas: how each is built, what it costs in Hyderabad, and where it fits.</p>
-      <dl class="meta">
+  <div class="wrap"><div class="glass sheet">
+    <div class="drawing"><figure id="heroSketch"></figure></div>
+    <div class="tblock">
+      <div class="ttl">
+        <p class="eyebrow">V&amp;V Sports Arena &amp; Event Venue</p>
+        <h1>Industrial <span>flooring</span> options</h1>
+        <p class="lead">Eight floor systems for the venue’s back-of-house, service and public areas: how each is built, what it costs in Hyderabad, and where it fits.</p>
+      </div>
+      <dl class="cells">
+        <div class="logo-cell"><img class="lg-light" src="black_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><img class="lg-dark" src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><span>concept issue</span></div>
         <div><dt>Client</dt><dd>Srinath Jeedi</dd></div>
         <div><dt>Architect</dt><dd>Vamsi Krishna Sangani</dd></div>
+        <div><dt>Drawing</dt><dd>FL-01 · Flooring options</dd></div>
+        <div><dt>Scale</dt><dd>NTS</dd></div>
         <div><dt>Issued</dt><dd>October 2026</dd></div>
+        <div><dt>Location</dt><dd>Hyderabad</dd></div>
       </dl>
     </div>
-    <figure class="c-epoxy" id="heroSketch"></figure>
   </div></div>
 </header>
 
@@ -340,7 +364,7 @@ footer .glass{padding:20px;display:grid;gap:8px;border-radius:18px}
       </ol>
     </div>
     <div class="glass contact">
-      <img src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion">
+      <img class="lg-light" src="black_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion"><img class="lg-dark" src="white_lockup.png" alt="URVI — Designed with Purpose. Crafted with Passion">
       <div><b>Vamsi Krishna Sangani</b><br>URVI DESIGN STUDIO<br><a href="https://urvidesigns.co.in">urvidesigns.co.in</a></div>
     </div>
   </div>
@@ -431,8 +455,51 @@ function sketch(layers,{scale=2.6,gap=0,seed=11,labels=false,title=''}={}){
   return `<svg class="sketch sk" viewBox="0 -4 ${Wv} ${H+4}" role="img" aria-label="Concept sketch of a ${layers.length}-layer floor build-up">${wash}<g filter="url(#rough)">${lines}${marks}</g>${ttl}</svg>`;
 }
 
-/* hero */
-document.getElementById('heroSketch').innerHTML=sketch(F[0].layers,{scale:2.8,gap:22,seed:3,labels:true,title:'exploded build-up · resin floor'});
+/* hero: architectural front elevation of the venue, pencilled with grid, washes and a floor cutaway */
+(function(){
+  const G=380; let w='',l='',t='';
+  const q=(t,a,b,c)=>(1-t)*(1-t)*a+2*(1-t)*t*b+t*t*c;
+  const W=(d,fill,op,dw)=>`<path class="wash" d="${d}" style="fill:${fill};fill-opacity:${op};--dw:${dw}s"/>`;
+  /* washes */
+  w+=W('M120 250 Q600 60 1080 250 Z','#D6CCF2',.85,1.5);
+  w+=W('M140 250 H1060 V380 H140 Z','var(--stone-l)',.95,1.6);
+  w+=W('M300 268 H900 V380 H300 Z','#C4DBF2',.95,1.8);
+  w+=W('M480 292 H720 V304 H480 Z','#F6CAD3',.95,2);
+  [[62,318,38],[92,300,30],[1128,316,36],[1102,300,28]].forEach(([x,y,r])=>w+=W(`M${x-r} ${y} a${r} ${r} 0 1 0 ${2*r} 0 a${r} ${r} 0 1 0 ${-2*r} 0`,'#D2E2BC',.9,2.1));
+  /* floor cutaway below ground */
+  const cut=[[6,'#F6CAD3'],[22,'var(--stone)'],[16,'var(--grav)'],[14,'var(--soil)']]; let cy=G+4;
+  cut.forEach(([h,c],i)=>{w+=W(`M860 ${cy} H1060 V${cy+h} H860 Z`,c,.9,2.3+i*.1);l+=P(`M860 ${cy} H1060 V${cy+h} H860 Z`,'',2+i*.08);cy+=h;});
+  /* grid lines A–E */
+  ['A','B','C','D','E'].forEach((g,i)=>{const x=[140,380,600,820,1060][i];l+=P(`M${x} 50 V${G+14}`,'cons',i*.06)+P(`M${x-13} 36 a13 13 0 1 0 26 0 a13 13 0 1 0 -26 0`,'',i*.06);t+=`<text class="num" x="${x}" y="41" text-anchor="middle" style="--dw:${(.5+i*.06).toFixed(2)}s">${g}</text>`;});
+  /* ground and earth hatch */
+  l+=P(`M10 ${G} H1190`,'',.2);
+  for(let x=24;x<1180;x+=22){ if(x>850&&x<1070) continue; l+=P(`M${x} ${G+4} l-9 11`,'hatch',.6+x*.0006);}
+  /* podium and wings */
+  l+=P('M140 380 V250 H1060 V380','',.4);
+  for(let y=262;y<376;y+=14){l+=P(`M152 ${y} H288`,'hatch',.9+(y-262)*.003)+P(`M912 ${y} H1048`,'hatch',.9+(y-262)*.003);}
+  /* shell roof: two arcs, eaves, ribs */
+  l+=P('M120 250 Q600 60 1080 250','',.6)+P('M150 250 Q600 92 1050 250','',.75)+P('M108 250 H1092','',.7);
+  for(let s=.08;s<.93;s+=.06){const x=q(s,120,600,1080),y=q(s,250,60,250);l+=P(`M${x.toFixed(1)} ${y.toFixed(1)} V250`,'hatch',.9+s*.6);}
+  /* glazing */
+  l+=P('M300 268 H900 V380 H300 Z','',1);
+  for(let x=340;x<900;x+=40) l+=P(`M${x} 268 V380`,'hatch',1.1+(x-340)*.0008);
+  l+=P('M300 318 H900','hatch',1.2);
+  /* canopy, columns, steps */
+  l+=P('M470 292 H730 V304 H470 Z','',1.3)+P('M500 304 V380 M700 304 V380','',1.4)+P('M520 380 v-5 h160 v5','hatch',1.5);
+  /* trees */
+  [[78,G,'M40 318 a38 38 0 0 1 60 -28 a30 30 0 0 1 22 40 a34 34 0 0 1 -82 -12'],[1116,G,'M1088 316 a36 36 0 0 1 58 -24 a28 28 0 0 1 20 38 a34 34 0 0 1 -78 -14']].forEach(([x,g,d],i)=>{l+=P(`M${x} ${g} V330`,'',1.6+i*.1)+P(d,'',1.7+i*.1)});
+  /* people */
+  [545,575,628,655,770,410].forEach((x,i)=>{const d=1.8+i*.05;l+=P(`M${x-4} ${G-27} a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 M${x} ${G-23} V${G-11} M${x} ${G-11} l-4 11 M${x} ${G-11} l4 11 M${x-6} ${G-19} H${x+6}`,'',d)});
+  /* construction overshoots + dimension */
+  l+=P('M120 250 h-26 M1080 250 h26','cons',.8)+P('M600 60 V40','cons',.9)+P(`M140 ${G+30} H1060 M140 ${G+24} v12 M1060 ${G+24} v12`,'cons',1.9);
+  /* leaders */
+  l+=P(`M960 ${G+20} L850 ${G+52}`,'',2.4);
+  t+=`<text x="600" y="287" text-anchor="middle" style="font-size:22px;--dw:2.2s">V&amp;V ARENA</text>`;
+  t+=`<text x="840" y="${G+62}" text-anchor="end" style="font-size:22px;--dw:2.6s">what’s underfoot: finish, slab, sub-base, soil</text>`;
+  t+=`<text x="18" y="452" style="font-size:19px;--dw:2.4s">front elevation · concept · nts</text>`;
+  t+=`<text x="640" y="118" style="font-size:20px;--dw:2.3s">shell roof</text>`;
+  document.getElementById('heroSketch').innerHTML=`<svg class="sketch sk" viewBox="0 0 1200 460" role="img" aria-label="Concept front elevation of the V&amp;V Arena with a cutaway of the floor build-up">${w}<g filter="url(#rough)">${l}</g>${t}</svg>`;
+})();
 
 /* systems */
 document.getElementById('chips').innerHTML=F.map((f,i)=>`<a class="glass c-${f.id}" href="#${f.id}">${String(i+1).padStart(2,'0')} ${f.name}</a>`).join('');
